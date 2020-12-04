@@ -59,8 +59,17 @@
                                     <i class="nc-icon nc-key-25"></i>
                                 </span>
                               </div>
-                                <input type="text" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" ngModel  required  #password="ngModel" name="password"/>
+                                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" ngModel  required  #password="ngModel" name="password"/>
+                                <div class="input-group-append">
+                                  <span class="input-group-text">
+                                    <i class="fa" [ngClass]="{
+                                                        'fa-eye-slash': !fieldTextType,
+                                                        'fa-eye': fieldTextType
+                                                      }" (click)="toggleFieldTextType()"></i>
+                                  </span>
+                                </div>
                             </div>
+                            
                               </div>
                               <div class="col-md-6 chaima" >
                               <label> Confirm your password</label>
@@ -71,10 +80,19 @@
                                       <i class="nc-icon nc-key-25"></i>
                                   </span>
                                 </div>
-                                  <input type="text" class="form-control" placeholder="Confirm your Password" (focus)="focus1=true" (blur)="focus1=false" ngModel required  #passwordConf="ngModel" name="passwordConf" />
+                                  <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="Confirm your Password" (focus)="focus1=true" (blur)="focus1=false" ngModel required  #passwordConf="ngModel" name="passwordConf" />
+                                  <div class="input-group-append">
+                                    <span class="input-group-text">
+                                      <i class="fa" [ngClass]="{
+                                                          'fa-eye-slash': !fieldTextType,
+                                                          'fa-eye': fieldTextType
+                                                        }" (click)="toggleFieldTextType()"></i>
+                                    </span>
+                                  </div>
                               </div>
+                              
                               </div>
-                                </div>
+                            </div>
                                 <div class='row chaima'> 
                               <div class="col-md-4 chaima">
                               <label>Street</label>

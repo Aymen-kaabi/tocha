@@ -59,7 +59,7 @@ import { TranslateModule } from '@ngx-translate/core';
         SettingsCompComponent,
         FeedbackCompComponent,
         AboutClientComponent,
-        ForgotCompComponent
+        ForgotCompComponent,
     ],
     entryComponents: [NgbdModalContent],
 })

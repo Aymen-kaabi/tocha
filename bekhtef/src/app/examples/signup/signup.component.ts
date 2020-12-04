@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
     styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  fieldTextType: boolean;
   focus: any;
   focus1: any;
     constructor( private ClientService: ClientService,
@@ -39,5 +40,8 @@ export class SignupComponent implements OnInit {
             }
       
       }
+}
+toggleFieldTextType() {
+  this.fieldTextType = !this.fieldTextType;
 }
 }

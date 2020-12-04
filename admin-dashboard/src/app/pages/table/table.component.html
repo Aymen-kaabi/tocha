@@ -1,14 +1,14 @@
 
     <div class="card">  
       <div class="card-header">
-        <h4 class="card-title">Shop</h4>
+       
       </div>
     
       <div class="row">      
        
         <div class="card col-sm-3"   style="width: 25rem;" *ngFor = "let item of products" >
           <h5 class="card-title">{{item.name}}</h5>
-          <img class="card-img-top" src={{item.image}} alt="Card image cap">
+          <img class="card-img-top" src={{item.image}} style="max-height:175px;margin-left:8%;max-width:260px" alt="Card image cap">
           <div class="card-body">
             <p class="card-text" *ngIf="item.quantity > 0 ">Quantity       : {{item.quantity}}</p>
             <p class="card-text" *ngIf="item.quantity === 0 || item.quantity === null " style="color:red">Quantity out of stock </p>

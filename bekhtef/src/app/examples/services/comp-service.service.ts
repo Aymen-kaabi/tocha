@@ -45,17 +45,26 @@ export class CompServiceService {
     console.log(baseUrl2 + 'register');
     return this.http.put(baseUrl + `${id}`, data);
   }
+  
+  getInfo(): Observable<any> {
+    return this.http.get(baseUrl)
+  }
+  sendEmail(data): Observable<any> {
+    console.log(data)
+    return this.http.post(baseUrl + 'changPass', data)
+  }
+  checkCode(data): Observable<any> {
+    console.log(data)
+    return this.http.post(baseUrl +'checkCode', data)
+  }
   changePass(data): Observable<any> {
     let obj = {
       email: data.email,
       newPassword: data.newPassword,
     };
-    console.log(obj)
+    console.log(data)
     console.log(baseUrl);
-    return this.http.patch(baseUrl + 'updatePass', obj);
-  }
-  getInfo(): Observable<any> {
-    return this.http.get(baseUrl)
+    return this.http.patch(baseUrl + 'password', data);
   }
 
 }

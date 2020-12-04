@@ -4,67 +4,37 @@
         </div>
 </div>
 
-
-
 <!-- // this is the search input text , with auto complete finding data -->
 <div class="container">
         <!-- //this is the drop buttons of categories and requirement price -->
 
-        <nav class="navbar navbar-expand-lg navbar-transparent">
-                <div class="container">
-                        <a class="navbar-brand" href="#">{{'Filtre' | translate }}</a>
-                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                                data-target="#navbar-transparent" aria-controls="navbarNav" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-bar"></span>
-                                <span class="navbar-toggler-bar"></span>
-                                <span class="navbar-toggler-bar"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbar-transparent">
-                                <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item">
-                                                <a class="nav-link" href="#"><i class="fa fa-facebook-official"
-                                                                aria-hidden="true"></i>{{'Facebook' | translate }} </a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="nav-link" href="#"><i class="fa fa-twitter"
-                                                                aria-hidden="true"></i>{{'Twitter' | translate }} </a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="nav-link" href="#"><i class="fa fa-instagram"
-                                                                aria-hidden="true"></i>{{'Instagram' | translate }} </a>
-                                        </li>
-                                </ul>
-                        </div>
-                </div>
-        </nav>
 
-        <div id=menu class="row filtre">
+        <div id=menu class="row filtre" style="margin-top: 20px ;">
                 <div class="col-lg-4 category">
-                        <label for="search-text" id="grey"><strong>{{'filterCategory' | translate }}
-                                </strong></label><br>
+                        <label for="search-text" id="grey"><strong>
+                                        {{ 'filterCategory' | translate}}</strong></label><br>
                         <select name="huge" class="form-control" data-role="select-dropdown"
                                 [(ngModel)]="selectedCategory">
-                                <option value="category" selected>{{'Category' | translate }}</option>
-                                <option value="food">{{'Food' | translate }}</option>
-                                <option value="clothes">{{'Clothes' | translate }}</option>
-                                <option value="fourniture">{{'Fourniture' | translate }}</option>
-                                <option value="electronicDevices">{{'Electronics' | translate }}</option>
-                                <option value="houseHolds">{{'House Holds' | translate }} </option>
-                                <option value="cleaningProduct">{{'Cleaning Products' | translate }} </option>
+                                <option value="category" selected>{{ 'Category' | translate}}</option>
+                                <option value="food">{{ 'Food' | translate}}</option>
+                                <option value="clothes">{{ 'Clothes' | translate}}</option>
+                                <option value="fourniture">{{ 'Fourniture' | translate}}</option>
+                                <option value="electronicDevices">{{ 'Electronics' | translate}}</option>
+                                <option value="houseHolds">{{ 'House Holds' | translate}}</option>
+                                <option value="cleaningProduct">{{ 'Cleaning Products' | translate}} </option>
                                 <option value="laboratory">{{'LaboratoryProduct' | translate}}</option>
-                                <option value="other">{{'Other' | translate }}</option>
+                                <option value="other">{{ 'Other' | translate}}</option>
                         </select>
                 </div>
 
                 <div class=" col-lg-4 price">
                         <div class="form-group">
-                                <label for="search-text" id="grey"><strong>{{'FiltreMaxPrice' | translate}}
+                                <label for="search-text" id="grey"><strong>{{ 'FiltreMaxPrice' | translate}}
                                         </strong></label><br>
                                 <select id="inputGroupSelect02" [(ngModel)]="selectedPrice" class="form-control"
                                         data-role="select-dropdown">
-                                        <option value="0" selected>{{'MaxPrice' | translate}}</option>
-                                        <option value="10.000">10 {{ 'Dt' | translate}}</option>
+                                        <option value="0" selected>{{ 'MaxPrice' | translate}}</option>
+                                        <option value="10.000">10{{ 'Dt' | translate}}</option>
                                         <option value="50.000">50 {{ 'Dt' | translate}}</option>
                                         <option value="200.000">200 {{ 'Dt' | translate}}</option>
                                         <option value="500.000"> 500 {{ 'Dt' | translate}}</option>
@@ -76,14 +46,16 @@
                 <div class="col-lg-4 search ">
                         <div class="form-group">
 
-                                <label for="search-text" id="grey"><strong>{{ 'searchProductname' | translate}}
-                                        </strong></label>
+
+                                <label for="search-text"
+                                        id="grey"><strong>{{ 'searchProductname' | translate}}</strong></label>
 
                                 <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
                                         [ngModel]="searchText" (ngModelChange)="modelChangeFn($event)"
-                                        placeholder="{{'EnterSearch' | translate}}" value="">
+                                        placeholder="{{'EnterSearch' | translate }}" value="">
 
                         </div>
+
                         <ul *ngIf=" searchText.length > 0" class="list-group list-group-flush">
 
                                 <li (click)="clickOnMe(item)" class="list-group-item"
@@ -96,23 +68,19 @@
                 </div>
 
         </div>
-        <!-- // this is the title -->
-        <div class="row">
-                <div class='title' style="margin-top: 37px ;">
-                        <h1 style="font-family:'Nerko One',cursive; color: #EB5E28;">
-                                {{ 'availableProducts' | translate}}</h1>
-                </div>
-        </div>
 
-        <!-- //rendering data to our view , using *ngFor injection method of data in html -->
         <div class="row" style="margin-top: 37px">
                 <div class="cover">
                 </div>
-
-
                 <div class="col-md-4"
                         *ngFor="let item of products | appFilter:searchText  |Category:selectedCategory |maxPrice:selectedPrice| slice: (page-1) * pageSize : page * pageSize">
-                        <div class="card">
+                        <div *ngIf="item === 'not found'"><h2 style="font-family:'Nerko One',cursive;">No Product Found ...</h2></div>
+                        <!-- <div class="row" *ngIf="item !== 'not found'">
+                                <div class='title' style="margin-top: 37px ;">
+                                        <h1 style="font-family:'Nerko One',cursive;"> {{ 'availableProducts' | translate}}</h1>
+                                </div>
+                        </div> -->
+                        <div *ngIf="item !== 'not found'" class="card">
                                 <div class="card-img">
                                         <img class="img-no-padding" style="max-height:200px;margin-left:8%;"
                                                 src="{{item.image}}">
@@ -122,14 +90,18 @@
                                         <h5 id="red"><del>{{item.oldPrice}} Dt</del></h5>
                                         <h5>{{item.newPrice}} Dt</h5>
 
+                                        <!-- <button class="btn btn-outline-danger btn-round"
+                                                (click)="open(item)">{{'seeMoreAbout' | translate }}
+                                        </button> -->
+                                        <!-- <app-modal-component></app-modal-component>-->
                                 </div>
                         </div>
                 </div>
-
+               
                 <!-- // here where we desplaying pagination buttons and a text of page -->
 
         </div><br><br><br><br>
-        <div class="page" style="margin-left: 200px; color: #EB5E28">
+        <div class="page">
                 <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="products.length">
                 </ngb-pagination>
         </div>

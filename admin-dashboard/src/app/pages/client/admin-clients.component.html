@@ -2,11 +2,10 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table" *ngFor="let item of allClientUsers">
+          <table class="table" >
             <thead class=" text-primary">
               <th>
                 Id
@@ -30,7 +29,7 @@
                 ZipCode
               </th>
               <th>
-                PhoneNumber
+                Tel
               </th>
               <th>
                 CreatedAt
@@ -41,7 +40,7 @@
 
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of allClientUsers">
                 <td>
                   {{item.id}}
                 </td>
@@ -72,9 +71,9 @@
                 <!-- <td class="text-right">
                   $36,738
                 </td> -->
-                <button type="button" class="btn btn-info text-right" (click)="deleteUser(item)">Delete</button>
-                <button type="button" id="buttonConfirmClient text-right" class="btn btn-info"
-                  (click)="confirmUser(item)">OK</button>
+                <button style="background-color: #51cbce" type="button" class="btn btn-info text-right" (click)="deleteUser(item)"> <i class="nc-icon nc-simple-remove"> </i></button>
+                <button style="background-color:#51cbce" type="button" id="buttonConfirmClient text-right" class="btn btn-info"
+                  (click)="confirmUser(item)"><i class="nc-icon nc-check-2"> </i></button>
               </tr>
             </tbody>
           </table>

@@ -1,7 +1,22 @@
 <div class="wrapper">
   <div class="section landing-section">
       <div class="container">
-          <div class="row">
+        <div class="row">
+            <div class="col-md-12">        
+                        <div class="feedback" *ngFor="let feedback of feedback  ">
+                            <div class="feed-body">
+                                <h4 style='color: #66615b;'>{{feedback.clientName}}:</h4>
+                                <div class='feedborder'>
+                                    <h5>{{feedback.text}}</h5>
+                                    <button class="btn btn-danger btn-round"
+                                        style='color: #EB5E28; margin-left: 186px '
+                                        (click)="deleteFeedback(feedback.id)">Delete</button>
+                                        <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <!-- <div class="row">
               <div class="col-md-8 mr-auto ml-auto">
                   <div class="feedback-list">
                       <label>Feedback :</label>
@@ -15,7 +30,11 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> -->
+
+        </div>
       </div>
   </div>
 </div>
+
+

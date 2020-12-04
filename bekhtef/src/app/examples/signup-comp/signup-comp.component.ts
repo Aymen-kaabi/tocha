@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./signup-comp.component.css']
 })
 export class SignupCompComponent implements OnInit {
+  fieldTextType: boolean;
     ref: AngularFireStorageReference;
     task: AngularFireUploadTask;
     uploadProgress: Observable<number>;
@@ -81,5 +82,8 @@ export class SignupCompComponent implements OnInit {
         Swal.fire("your password should contain special caracter")
        }
      }
+     toggleFieldTextType() {
+      this.fieldTextType = !this.fieldTextType;
+    }
  }
 

@@ -87,8 +87,12 @@ export class UserComponent implements OnInit {
             }
         }   
     }
-    save(name,number){
-        
+    save(name){
+
+    // this.service.sendMsg(name).subscribe(() => {
+    //     console.log("SMS send")
+    // })   
+     
     const options = {
         filename:`${name}.pdf`,
         image : {type: 'jpeg'},
@@ -99,11 +103,8 @@ export class UserComponent implements OnInit {
     html2pdf()
     .from(content)
     .set(options)
-    .save();
-    
-    this.service.sendMsg(number).subscribe((data: any) => {
-        console.log(data) 
-      })
+    .save()
+  
     }
     
 }

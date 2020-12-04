@@ -77,9 +77,17 @@
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="{{'Password' | translate}}"
+                    <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="{{'Password' | translate}}"
                       (focus)="focus1=true" (blur)="focus1=false" ngModel required #password="ngModel"
                       name="password" />
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa" [ngClass]="{
+                                              'fa-eye-slash': !fieldTextType,
+                                              'fa-eye': fieldTextType
+                                            }" (click)="toggleFieldTextType()"></i>
+                        </span>
+                      </div>
                   </div>
                 </div>
 
@@ -91,9 +99,17 @@
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="{{'ConfirmPassword' | translate}}"
+                    <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" placeholder="{{'ConfirmPassword' | translate}}"
                       (focus)="focus1=true" (blur)="focus1=false" ngModel required #passwordConf="ngModel"
                       name="passwordConf" />
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa" [ngClass]="{
+                                              'fa-eye-slash': !fieldTextType,
+                                              'fa-eye': fieldTextType
+                                            }" (click)="toggleFieldTextType()"></i>
+                        </span>
+                      </div>
                   </div>
                 </div>
               </div>

@@ -2,11 +2,10 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table id="refresh" class="table" *ngFor="let item of allCompanyUsers">
+          <table id="refresh" class="table">
             <thead class=" text-primary">
               <th>
                 Id
@@ -30,10 +29,10 @@
                 Description
               </th>
               <th>
-                PhoneNumber 1
+                Tel n° 1
               </th>
               <th>
-                PhoneNumber 2
+                Tel n° 2
               </th>
               <th>
                 Patent n°
@@ -50,7 +49,7 @@
 
             </thead>
             <tbody>
-              <tr>
+              <tr  *ngFor="let item of allCompanyUsers">
                 <td>
                   {{item.id}}
                 </td>
@@ -82,14 +81,14 @@
                   {{item.numberPatent}}
                 </td>
                 <td>
-                  {{item.logo}}
+                  <img src={{item.logo}} style="max-height:100px;margin-left:8%;max-width:100px"/>
                 </td>
                 <td>
                   {{item.createdAt}}
                 </td>
-                <button type="button" class="btn btn-info text-right" (click)="deleteUser(item)">Delete</button>
-                <button class="text-right" type="button" id="buttonConfirmCompany" class="btn btn-info"
-                  (click)="confirmUser(item)">OK</button>
+                <button style="background-color: #51cbce" type="button" class="btn btn-info text-right" (click)="deleteUser(item)"><i class="nc-icon nc-simple-remove"> </i></button>
+                <button style="background-color:#51cbce" class="text-right" type="button" id="buttonConfirmCompany" class="btn btn-info"
+                  (click)="confirmUser(item)"><i class="nc-icon nc-check-2"> </i></button>
               </tr>
             </tbody>
           </table>

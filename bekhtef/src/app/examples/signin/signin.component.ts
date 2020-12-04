@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../services/client.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signin',
@@ -32,9 +33,9 @@ export class SigninComponent implements OnInit {
     this.ClientService.createLogin(data).subscribe(
       (res) => {
         if (res.status === 404) {
-          document.getElementById('email-error').innerHTML ='your email does not exist !';
+          Swal.fire('your email does not exist !');
         } else if (res.status === 500) {
-          document.getElementById('pass-error').innerHTML ='wrong password, try again !';
+          Swal.fire('wrong password, try again !');
         } else {
           console.log(res);
           window.localStorage.setItem('token', res.token);

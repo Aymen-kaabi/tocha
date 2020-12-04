@@ -160,6 +160,7 @@ export class ProductService {
       category: data.category,
       image: data.image,
       ownerId: data.ownerId,
+      ownerType: data.ownerType,
       quantity: data.quantity,
       type: data.type
     };

@@ -8,10 +8,9 @@ const verify = require("./VerificationToken.js");
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 
-
 // const { loginValidation } = require('./Validation.js')
 dotenv.config();
-const notification = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOK);
+// const notification = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOK);
 
 router.get("/", async (req, res) => {
   await Clients.findAll().then((clients) => res.json(clients));
@@ -99,20 +98,6 @@ router.put("/:id", async (req, res) => {
   });
 });
 
-router.patch("/password", async (req, res) => {
-  const salt = await bcrypt.genSalt(10);
-  const hashPassword = await bcrypt.hash(req.body.newPassword, salt);
-  await Clients.findOne({ where: { email: req.body.email } }).then((clients) => {
-    clients
-    .update({
-       password: hashPassword
-      })
-      .then((clients) => {
-        res.json(clients);
-      }).catch((err) => console.log(err))
-  });
-});
-
 router.delete("/:id", async (req, res) => {
   await Clients.findByPk(req.params.id)
     .then((clients) => {
@@ -128,15 +113,10 @@ router.delete("/", async (req, res) => {
     res.json("cleared")
   );
 });
-router.post("/changPassEmail",async(req,res) => {
-  await Clients.findOne({ where: { email: req.body.email } }).then((client) => {
-    nodemailer.createTestAccount((err, email) => {
-      var transporter = nodemailer.createTransport(
-        smtpTransport({
-          service: "gmail",
-          port: 465,
-          secure: false,
-          host: "smtp.gmail.com",
+router.post("/changPass",async(req,res) => {
+  const hashPassword = await bcrypt.hash(req.body.email, 0);
+  let transporter = nodemailer.createTransport({
+          service: "Gmail",
           auth: {
             user: process.env.GMAIL_USER,
             pass: process.env.GMAIL_PASS,
@@ -145,34 +125,47 @@ router.post("/changPassEmail",async(req,res) => {
             rejectUnauthorized: false,
           },
         })
-      );
-    
       let mailOptions = {
         from: process.env.GMAIL_USER,
         to: `${req.body.email}`,
-        subject: "Be5tef",
-        text: `change your password please`,
+        subject: "Reset password",
+        text:hashPassword,
       };
-    
-      transporter.sendMail(mailOptions, (err, info) => {
-        if(err){ 
-          console.log(err)
-        } 
-          res.send(info)
+      transporter.sendMail(mailOptions).then(() => {
+        res.send({ status: 200 });
+      });
+    });
+router.post("/checkCode", async (req, res)=>{
+  console.log(req.body.email)
+  console.log(req.body.code)
+  const validCode = await bcrypt.compare(req.body.email, req.body.code);
+  if(validCode) return res.send({ status: 200 })
+  if(!validCode) return res.send({ status: 500 })
+})
+router.patch("/password", async (req, res) => {
+  console.log(req.body)
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(req.body.password, salt);
+  await Clients.findOne({ where: { email: req.body.email } }).then((clients) => {
+    clients
+    .update({
+       password: hashPassword
       })
-    })
-  }).catch((err) => console.log(err))
-})
+      .then((clients) => {
+        res.json(clients);
+      }).catch((err) => console.log(err))
+  });
+});
+// router.post("/msg",async (req, res) => {
+//   console.log(req)
+//   notification
+//   .messages.create({  
+//         body: 'Hello Sir/Madame, your request is accepted and you will receive your goods within three days. Our representative will contact you before delivery. Thank you for trusting our products. For more inquiries, contact us through our website. bekhtef Team',
+//          from: '+12674332926',       
+//          to: '+21654185962' 
+//        }) 
+//       .then(message => console.log(message.sid)) 
+//       .done();
+// })
 
-router.post("/msg",async (req, res) => {
-  console.log(req)
-  notification
-  .messages.create({  
-        body: 'Hello Sir/Madame, your request is accepted and you will receive your goods within three days. Our representative will contact you before delivery. Thank you for trusting our products. For more inquiries, contact us through our website. bekhtef Team',
-         from: '+12674332926',       
-         to: '+21654185962' 
-       }) 
-      .then(message => console.log(message.sid)) 
-      .done();
-})
 module.exports = router;

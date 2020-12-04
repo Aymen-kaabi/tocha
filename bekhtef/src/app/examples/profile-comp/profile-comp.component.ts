@@ -40,9 +40,9 @@ export class ProfileCompComponent implements OnInit {
     ngOnInit() {
       let user = JSON.parse(window.localStorage.getItem('id'));
       let name  =  JSON.parse(JSON.stringify(window.localStorage.getItem('name')))
-      let status  =  JSON.parse(JSON.stringify(window.localStorage.getItem('status')))
+      this.compStatus  =  JSON.parse(JSON.stringify(window.localStorage.getItem('status')))
       this.logo  =  JSON.parse(JSON.stringify(window.localStorage.getItem('logo')))
-      this.compStatus = status
+     
       this.name = name ;     
       this.user = user ;
      console.log(user)
@@ -86,7 +86,7 @@ export class ProfileCompComponent implements OnInit {
        console.log(user)
        console.log(f.value)
        const obj = {
-          name:this.name,
+          name:f.value.title,
           oldPrice:f.value.oldPrice,
           newPrice:f.value.newPrice,
           description:f.value.description,

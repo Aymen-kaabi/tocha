@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { CompServiceService } from '../services/comp-service.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-signin-comp',
@@ -31,9 +33,9 @@ export class SigninCompComponent implements OnInit {
     this.CompServiceService.createLogin(data).subscribe(
       (res) => {
         if (res.status === 404) {
-          document.getElementById('email-error').innerHTML ='your email does not exist !';
+          Swal.fire('your email does not exist !');
         } else if (res.status === 500) {
-          document.getElementById('pass-error').innerHTML ='wrong password, try again !';
+          Swal.fire('wrong password, try again !');
         } else {
           console.log(res);
           window.localStorage.setItem('token', res.token);

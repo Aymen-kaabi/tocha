@@ -47,17 +47,25 @@ export class ProductsComponent implements OnInit {
       (error) => {
         console.log(error)
       })
-  }
+      this.service.deleteOneProduct(data.id).subscribe((res) => {
+        document.getElementById("myText").innerHTML = res;
+      },
+        (error) => {
+          console.log(error);
+        });
+        this.products = this.products.filter((product) =>product.id !== data.id )
+    }
+  
 
   deleteOne(id) {
     console.log(id)
+    this.products = this.products.filter((product,i) => product.id !== id )
     this.service.deleteOneProduct(id).subscribe((res) => {
       document.getElementById("myText").innerHTML = res;
-
     },
       (error) => {
         console.log(error);
-      });
-    
+      })
+      
   }
 }

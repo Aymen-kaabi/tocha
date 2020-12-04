@@ -58,13 +58,14 @@ export class ClientUsersService {
     console.log(obj)
     return this.http.post(baseUrl + "register", obj);
   }
-  deleteClientUser(id): Observable<any> {
+
+   deleteClientUser(id): Observable<any> {
     return this.http.delete(baseUrl2 + `${id}`)
   }
 
-  sendMsg(data):  Observable<any>{
-    console.log(data)
-    return this.http.post( baseUrl+ "msg", data)
-   }
+  // sendMsg(data):  Observable<any>{
+  //   console.log(data)
+  //   return this.http.post( baseUrl+ "msg", data)
+  //  }
 
 }

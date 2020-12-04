@@ -1,26 +1,66 @@
 <div class="wrapper">
-  <div class="page-header" style="background-image: url('./assets/img/back1.jpg');">
-    <div class="filter"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
-          <div class="card card-register">
-            <form class="register-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
-              <!--   <label>{{'Password' | translate}}</label>-->
-              <label>{{'Email' | translate}}</label>
-              <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="nc-icon nc-key-25"></i>
-                  </span>
+    <div class="page-header" style="background-image: url('./assets/img/back1.jpg');">
+        <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                      <div class="card card-register" *ngIf="status === ''">
+                     <h3>Put your email please</h3> 
+                          <form class="register-form" #f="ngForm" (ngSubmit)="checkEmail(f)">
+                              <label>Email</label>
+                              <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-key-25"></i>
+                                  </span>
+                                </div>
+                                  <input type="text" class="form-control" placeholder="Your Email" (focus)="focus1=true" (blur)="focus1=false" ngModel  required  #email="ngModel" name="email"/>
+                              </div>
+                              <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-block btn-round"> Reset my password</button>
+                          </form>
+                      </div>
+                      <div class="card card-register" *ngIf="status === 'code'">
+                        <h3>Put Code of validation sended to your email </h3> 
+                             <form class="register-form" #f="ngForm" (ngSubmit)="checkCode(f)">
+                                 <label>Validation code </label>
+                                 <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                                   <div class="input-group-prepend">
+                                     <span class="input-group-text">
+                                         <i class="nc-icon nc-key-25"></i>
+                                     </span>
+                                   </div>
+                                     <input type="text" class="form-control" placeholder="Your Code" (focus)="focus1=true" (blur)="focus1=false" ngModel  required  #code="ngModel" name="code"/>
+                                 </div>
+                                 <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-block btn-round"> Reset my password</button>
+                             </form>
+                      </div>
+                      <div class="card card-register" *ngIf="status === 'reset'">
+                          <h3>Put New password</h3> 
+                               <form class="register-form" #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+                                   <label>New Password</label>
+                                   <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                                     <div class="input-group-prepend">
+                                       <span class="input-group-text">
+                                           <i class="nc-icon nc-key-25"></i>
+                                       </span>
+                                     </div>
+                                       <input type="text" class="form-control" placeholder="New Password" (focus)="focus1=true" (blur)="focus1=false" ngModel  required  #newPassword="ngModel" name="newPassword"/>
+                                   </div>
+                                   <label>Confirm New Password</label>
+                                   <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1===true}">
+                                     <div class="input-group-prepend">
+                                       <span class="input-group-text">
+                                           <i class="nc-icon nc-key-25"></i>
+                                       </span>
+                                     </div>
+                                       <input type="text" class="form-control" placeholder="Confirm your Password" (focus)="focus1=true" (blur)="focus1=false" ngModel required  #passwordConf="ngModel" name="passwordConf" />
+                                   </div>
+                                   <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-block btn-round"> Reset my password</button>
+                               </form>
+                      </div>
+                    </div>
                 </div>
-              </div>
-              <button type="submit" [disabled]="f.invalid" class="btn btn-danger btn-block btn-round">
-                {{'Reset password' | translate}}</button>
-            </form>
-          </div>
-        </div>
-      </div>
+              
+            </div>
     </div>
-  </div>
 </div>
