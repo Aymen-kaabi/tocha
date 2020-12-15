@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompServiceService } from '../services/comp-service.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-settings-comp',
   templateUrl: './settings-comp.component.html',
@@ -47,7 +48,17 @@ export class SettingsCompComponent implements OnInit {
         console.log(error);
       }
     );
-    alert("Your info is updated successfuly")
+    Swal.fire({
+      text: "Your info is updated successfuly",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      confirmButtonColor: '#fbc658',
+    })
+   // alert("Your info is updated successfuly")
           this.router.navigateByUrl('/profileComp');
   }
 }

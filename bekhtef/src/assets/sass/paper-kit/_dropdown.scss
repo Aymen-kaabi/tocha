@@ -328,7 +328,7 @@
     li:hover,
     li:focus{
         a{
-            color: $font-color;
+            color: #EB5E28;
             opacity: 1;
             text-decoration: none;
         }
@@ -443,4 +443,9 @@
             }
         }
     }
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .show > .btn-danger.dropdown-toggle {
+    background-color: #EB5E28 !important;
+    color: #FFFFFF;
+    border-color: #EB5E28 !important;
 }

@@ -38,7 +38,6 @@ export class ForgotCompComponent implements OnInit {
     console.log(res)
     if(res.status === 200 ){
       this.status = 'reset'
-      this.code = ''
     }else(res.status !== 200 )
      Swal.fire("Your code is wrong")
      this.status = 'code'
@@ -48,7 +47,19 @@ export class ForgotCompComponent implements OnInit {
        const car = /[A-Z]/gi
         const other = /[@,<,>,?,!,&,|,%,$,£]/
         if(f.value.newPassword.match(car)=== null || f.value.newPassword.match(other)===null || f.value.newPassword.length < 8 ){
-         Swal.fire ("your newPassword should contain special caracter")
+     //    Swal.fire ("your newPassword should contain special caracter")
+
+         Swal.fire({
+          text: "your newPassword should contain special caracter",
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          confirmButtonColor: '#fbc658',
+        })
+
          
         }else if(f.value.newPassword.match(car)!== null && f.value.newPassword.match(other)!==null && f.value.newPassword.length >= 8 ){
               if(f.value.passwordConf === f.value.newPassword ){
@@ -64,10 +75,31 @@ export class ForgotCompComponent implements OnInit {
                           console.log(error);
                        }
                     );
-               Swal.fire("your new password is updated succsessfuly")
+                    Swal.fire({
+                      text: "your new password is updated succsessfuly",
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      confirmButtonColor: '#fbc658',
+                    })
+            
+            //   Swal.fire("your new password is updated succsessfuly")
                this.router.navigateByUrl('/signinComp');
               }else {
-               Swal.fire("reset new password again")
+                Swal.fire({
+                  text:"reset new password again",
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  },
+                  confirmButtonColor: '#fbc658',
+                })
+             //  Swal.fire("reset new password again")
              }
 
        }

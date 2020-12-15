@@ -127,7 +127,19 @@ export class ModalPurchaseComponent {
       (error) => {
         console.log(error);
       })
-      Swal.fire("thank you for buying from bekhtef , you will receive a notification on your phone number ").then(()=>
+      
+     // Swal.fire("thank you for buying from bekhtef , you will receive a notification on your phone number ")
+      
+      Swal.fire({
+        text: "thank you for buying from bekhtef , you will receive a notification on your phone number",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        confirmButtonColor: '#fbc658',
+      }).then(()=>
       window.location.reload()
       )
       

@@ -10,6 +10,8 @@ import {
   import { Observable } from 'rxjs';
   import { finalize ,map, catchError } from 'rxjs/operators';
   import { animate } from '@angular/animations';
+import { MessagesService } from '../services/messages.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-profile-comp',
   templateUrl: './profile-comp.component.html',
@@ -34,7 +36,7 @@ export class ProfileCompComponent implements OnInit {
   name: any ;
   logo:any;
   compStatus: string = "";
-  constructor(private ProductService: ProductService, private fileStorage: AngularFireStorage,
+  constructor(private ProductService: ProductService, private fileStorage: AngularFireStorage,private msgServer: MessagesService ,
     private router: Router) { }
 
     ngOnInit() {
@@ -158,10 +160,41 @@ export class ProfileCompComponent implements OnInit {
             console.log(error)
         })
     }
-    window.location.reload()
+
+    Swal.fire({
+      text: "your product will be soon added , after being verified by the admin!",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      confirmButtonColor: '#fbc658',
+    }).then(()=> window.location.reload())
+
+    
    }
    changeInfo(){
      this.router.navigateByUrl('/seetingsComp');
    }
 
+   onSend(msg: NgForm){
+    if(msg.value.text !== ""){
+      let user= JSON.parse(window.localStorage.getItem('id'));
+      const obj = {
+        receiverId: user,
+        messageSent: msg.value.text,
+      }
+      console.log(obj);
+      this.msgServer.addMessages(obj).subscribe((res)=>{
+        console.log('msg',res);
+      },
+      (error) => {
+      console.log(error);
+      })
+     window.location.reload();
+    }
+  }
+
+   
 }

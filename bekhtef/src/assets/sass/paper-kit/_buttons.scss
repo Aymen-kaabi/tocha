@@ -215,3 +215,9 @@
         }
     }
 }
+.btn:disabled, .btn[disabled], .btn.disabled {
+    opacity: 0.5;
+    background-color: #fbc658;
+    border-color: #fbc658;
+    filter: alpha(opacity=50);
+}

@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@sweetalert2/theme-minimal": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -29,7 +30,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.6",
     "sequelize": "^6.3.5",
-    "sweetalert2": "^10.11.0",
+    "sweetalert2": "^10.11.1",
     "twilio": "^3.52.0"
   }
 }

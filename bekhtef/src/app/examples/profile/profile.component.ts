@@ -10,6 +10,7 @@ import {
   } from '@angular/fire/storage';
   import { Observable } from 'rxjs';
   import { finalize } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
@@ -154,7 +155,16 @@ export class ProfileComponent implements OnInit {
               console.log(error)
           })
       }
-      window.location.reload()
+      Swal.fire({
+        text: "your product will be soon added , after being verified by the admin!",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        confirmButtonColor: '#fbc658',
+      }).then(()=> window.location.reload())
     }
     changeInfo(){
       this.router.navigateByUrl('/settings');

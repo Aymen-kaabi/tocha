@@ -6,6 +6,7 @@ import { NgbdModalComponent } from '../modal/modal.component';
 import { NgbdModalContent } from '../modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPurchaseComponent } from '../modal-purchase/modal-purchase.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -80,7 +81,17 @@ export class ShoppingCartComponent implements OnInit {
     
   confirm(){
     if(this.total > 0){
-      alert("your purchases is succsesfuly confirmed")
+      Swal.fire({
+        text: "your purchases is succsesfuly confirmed",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        confirmButtonColor: '#fbc658',
+      })
+     // alert("your purchases is succsesfuly confirmed")
     }else {
       this.router.navigateByUrl('/landing');
     }

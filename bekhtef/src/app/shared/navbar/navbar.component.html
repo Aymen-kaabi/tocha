@@ -48,7 +48,7 @@
 
                 <li class="nav-item" *ngIf="status === ''">
                     <span class="select">
-                        <select class="nav-link" style="background-color: transparent !important; border-radius:30px;" #selectedLang
+                        <select class="nav-link bootstrap-select" style="background-color: transparent !important; border-radius:30px;" #selectedLang
                             (change)="switchLang(selectedLang.value)">
                             <option class="dropdown-item " *ngFor="let language of translate.getLangs()"
                                 [value]="language" [selected]="language === translate.currentLang">

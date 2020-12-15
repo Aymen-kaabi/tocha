@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ClientService } from '../services/client.service';
 @Component({
   selector: 'app-settings',
@@ -47,7 +48,17 @@ export class SettingsComponent implements OnInit {
         console.log(error);
       }
     );
-    alert("Your info is updated successfuly")
+    Swal.fire({
+      text: "Your info is updated successfuly",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      confirmButtonColor: '#fbc658',
+    })
+   // alert("Your info is updated successfuly")
     this.router.navigateByUrl('/user-profile');
   }
 }

@@ -33,9 +33,29 @@ export class SigninCompComponent implements OnInit {
     this.CompServiceService.createLogin(data).subscribe(
       (res) => {
         if (res.status === 404) {
-          Swal.fire('your email does not exist !');
+          Swal.fire({
+            text: 'your email does not exist !',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            confirmButtonColor: '#fbc658',
+          })
+       //   Swal.fire('your email does not exist !');
         } else if (res.status === 500) {
-          Swal.fire('wrong password, try again !');
+          Swal.fire({
+            text: 'wrong password, try again !',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            confirmButtonColor: '#fbc658',
+          })
+      //    Swal.fire('wrong password, try again !');
         } else {
           console.log(res);
           window.localStorage.setItem('token', res.token);
